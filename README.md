@@ -1,5 +1,11 @@
 # 🏦 Bank Management System
 
+🌐 **Live Project Website:**  
+https://preetha-codes.github.io/bank-management-system/
+
+💻 **Source Code:**  
+https://github.com/preetha-codes/bank-management-system
+
 A console-based **Bank Management System** developed using C++. This project simulates basic banking operations while demonstrating Object-Oriented Programming (OOP), file handling, and data management.
 
 ## 📌 Project Overview
