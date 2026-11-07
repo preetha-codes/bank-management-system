@@ -86,6 +86,26 @@ This allows account information and transaction history to remain available when
 
 **Important:** This is an educational banking simulation. Data is stored in plain text and does not include the security, encryption, authentication, or safeguards required by real banking systems. Use fictional information only.
 
+## 📸 Application Screenshots
+
+### 1. Account Creation
+![Account Creation](screenshots/account-creation.png)
+
+### 2. Deposit Transaction
+![Deposit Transaction](screenshots/deposit-transaction.png)
+
+### 3. Withdrawal Transaction
+![Withdrawal Transaction](screenshots/withdrawal-transaction.png)
+
+### 4. Balance Inquiry
+![Balance Inquiry](screenshots/balance-inquiry.png)
+
+### 5. Transaction History
+![Transaction History](screenshots/transaction-history.png)
+
+### 6. Data Persistence
+![Data Persistence](screenshots/data-persistence.png)
+
 ## 🎯 Learning Outcomes
 
 Through this project, I practised:
