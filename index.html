@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the Bank Management System, a C++ project demonstrating object-oriented programming, file handling, and basic banking operations.">
+  <title>Bank Management System | C++ Project</title>
+
+  <style>
+    :root {
+      --bg: #080f1d;
+      --surface: #111c2e;
+      --surface-light: #17253a;
+      --text: #f2f6fc;
+      --muted: #a8b6ca;
+      --accent: #64d9c5;
+      --blue: #80aaff;
+      --border: rgba(255,255,255,.10);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,15,29,.92);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 105px 0 95px;
+      background:
+        radial-gradient(ellipse at 85% 20%, rgba(70,130,220,.20), transparent 38%),
+        radial-gradient(ellipse at 15% 80%, rgba(70,217,197,.12), transparent 35%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      border: 1px solid rgba(100,217,197,.35);
+      background: rgba(100,217,197,.08);
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: .82rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 5rem);
+      line-height: 1.08;
+      max-width: 850px;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 1.08rem;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 21px;
+      border-radius: 9px;
+      font-weight: 750;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #07151b;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+      margin-bottom: 35px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 22px;
+    }
+
+    .panel, .feature-card, .tech-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 27px;
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .stat {
+      margin-bottom: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.35rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      transition: .2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(100,217,197,.5);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3, .tech-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .feature-card p, .tech-card p {
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .tech-card {
+      padding: 21px;
+    }
+
+    .tech-card strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 7px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .step {
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+      padding: 20px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .step b {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .notice {
+      background: rgba(128,170,255,.08);
+      border: 1px solid rgba(128,170,255,.22);
+      border-radius: 14px;
+      padding: 22px;
+      color: var(--muted);
+    }
+
+    .notice strong {
+      color: var(--text);
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, #142a3a, #14203a);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 55px 25px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 570px;
+      margin: 0 auto 25px;
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .88rem;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tech-grid, .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 13px;
+      }
+
+      .hero {
+        padding: 75px 0;
+      }
+
+      .features-grid, .tech-grid, .steps {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="#">BANK<span>SYS.</span></a>
+        <div class="nav-links">
+          <a href="#about">Overview</a>
+          <a href="#features">Features</a>
+          <a href="#technology">Technology</a>
+          <a href="#workflow">Workflow</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">C++ PROJECT · OBJECT-ORIENTED PROGRAMMING</div>
+        <h1>Bank Management.<br><span>Built with C++.</span></h1>
+        <p>
+          A console-based banking application designed to demonstrate
+          object-oriented programming, file handling, and essential
+          account management operations.
+        </p>
+        <div class="buttons">
+          <a class="btn btn-primary"
+             href="https://github.com/preetha-codes/bank-management-system"
+             target="_blank" rel="noopener noreferrer">
+            Explore Source Code ↗
+          </a>
+          <a class="btn btn-secondary" href="#features">
+            Explore Features
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-label">01 / Project overview</div>
+        <h2>A practical application of C++ concepts</h2>
+        <p class="section-intro">
+          This project simulates essential banking operations through
+          a menu-driven interface. It combines classes, objects,
+          vectors, and file operations to organise account and
+          transaction records.
+        </p>
+
+        <div class="about-grid">
+          <div class="panel">
+            <h3>About the project</h3>
+            <br>
+            <p>
+              Users can create bank accounts, deposit and withdraw
+              money, check balances, search for accounts, and review
+              transaction history. Local file storage allows saved
+              records to be loaded again when the program restarts.
+            </p>
+          </div>
+
+          <div class="panel">
+            <div class="stat">
+              <strong>C++</strong>
+              <span>Programming language</span>
+            </div>
+            <div class="stat">
+              <strong>OOP</strong>
+              <span>Object-oriented design</span>
+            </div>
+            <div class="stat">
+              <strong>File Handling</strong>
+              <span>Local data persistence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-label">02 / Core capabilities</div>
+        <h2>What the application can do</h2>
+        <p class="section-intro">
+          The application brings essential account operations
+          together in one menu-driven C++ program.
+        </p>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon">🏦</div>
+            <h3>Account Creation</h3>
+            <p>Create customer accounts with account details and an initial deposit.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Deposits</h3>
+            <p>Add funds to an existing account and update its balance.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">💳</div>
+            <h3>Withdrawals</h3>
+            <p>Withdraw funds with balance validation.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Balance Inquiry</h3>
+            <p>Check the current balance associated with an account.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🔎</div>
+            <h3>Account Search</h3>
+            <p>Find customer accounts using their account numbers.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🧾</div>
+            <h3>Transaction History</h3>
+            <p>Review recorded deposits and withdrawals.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="technology">
+      <div class="container">
+        <div class="section-label">03 / Technical foundation</div>
+        <h2>Technology and concepts</h2>
+        <p class="section-intro">
+          Built around fundamental C++ programming techniques
+          and object-oriented design.
+        </p>
+
+        <div class="tech-grid">
+          <div class="tech-card">
+            <strong>C++11</strong>
+            <p>Core programming language and standard.</p>
+          </div>
+          <div class="tech-card">
+            <strong>Classes & Objects</strong>
+            <p>Representing accounts, transactions, and bank operations.</p>
+          </div>
+          <div class="tech-card">
+            <strong>Encapsulation</strong>
+            <p>Keeping account data private and using class methods.</p>
+          </div>
+          <div class="tech-card">
+            <strong>File Handling</strong>
+            <p>Reading and writing records using file streams.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="container">
+        <div class="section-label">04 / Application workflow</div>
+        <h2>How it works</h2>
+        <p class="section-intro">
+          A straightforward sequence connects user input,
+          account operations, and locally stored records.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <b>01 — Input</b>
+            <p>The user selects an operation from the application menu.</p>
+          </div>
+          <div class="step">
+            <b>02 — Process</b>
+            <p>The application validates the input and processes the request.</p>
+          </div>
+          <div class="step">
+            <b>03 — Update</b>
+            <p>Account balances and transaction records are updated.</p>
+          </div>
+          <div class="step">
+            <b>04 — Save</b>
+            <p>Records are stored locally for future program sessions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="notice">
+          <strong>Educational project disclaimer</strong>
+          <br>
+          This project is a programming demonstration, not a real
+          banking service. It stores data in local plain-text files
+          and does not implement production-grade authentication,
+          encryption, or financial security controls. Use fictional
+          information only.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div class="section-label">Explore the code</div>
+          <h2>Interested in how it was built?</h2>
+          <p>
+            Explore the source code, project documentation,
+            and implementation details in the GitHub repository.
+          </p>
+          <a class="btn btn-primary"
+             href="https://github.com/preetha-codes/bank-management-system"
+             target="_blank" rel="noopener noreferrer">
+            View Project on GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Designed and developed by <strong>Preetha Maria Rosalind Subramani</strong></p>
+      <p>Bank Management System · C++ Educational Project</p>
+    </div>
+  </footer>
+
+</body>
+</html>
